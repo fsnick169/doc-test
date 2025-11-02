@@ -20,7 +20,9 @@
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="sdk_interface.utils package" href="sdk_interface.utils.html" />
+    <link rel="prev" title="sdk interface" href="modules.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,9 +45,31 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Python SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Python SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Install.html">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Examples.html">Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">sdk interface</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sdk_interface package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.base">sdk_interface.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.constants">sdk_interface.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.contracts">sdk_interface.contracts module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.exceptions">sdk_interface.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.extensions">sdk_interface.extensions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.interfaces">sdk_interface.interfaces module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.key">sdk_interface.key module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.keypair">sdk_interface.keypair module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface.storage">sdk_interface.storage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-sdk_interface">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -62,6 +86,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Python SDK</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">sdk interface</a></li>
       <li class="breadcrumb-item active">sdk_interface package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/python-sdk/Reference/sdk_interface.rst.txt" rel="nofollow"> View page source</a>
@@ -2196,7 +2222,7 @@ sender_public_key: sender’s public key</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sdk_interface.keypair.Keypair.encrypt_message">
-<span class="sig-name descname"><span class="pre">encrypt_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b&quot;\x04\x99\x07\\\xe2\xc8]\xe45\xffp'\xef8\xc4\xddz\xe0\xe6\x96i^\xb5\xc2&quot;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../../_modules/sdk_interface/keypair.html#Keypair.encrypt_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sdk_interface.keypair.Keypair.encrypt_message" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">encrypt_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\x7f=%C\x92\xd3\x91\x82oq\x9c\x90\x97bQF7\x14\x05R\xfa\x1f</span> <span class="pre">\xc2'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../../_modules/sdk_interface/keypair.html#Keypair.encrypt_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sdk_interface.keypair.Keypair.encrypt_message" title="Link to this definition"></a></dt>
 <dd><p>Encrypts message with for specified recipient</p>
 <section id="id234">
 <h3>Parameters<a class="headerlink" href="#id234" title="Link to this heading"></a></h3>
@@ -3082,7 +3108,7 @@ sender_public_key: sender’s public key</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sdk_interface.Keypair.encrypt_message">
-<span class="sig-name descname"><span class="pre">encrypt_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b&quot;\x04\x99\x07\\\xe2\xc8]\xe45\xffp'\xef8\xc4\xddz\xe0\xe6\x96i^\xb5\xc2&quot;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../../_modules/sdk_interface/keypair.html#Keypair.encrypt_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sdk_interface.Keypair.encrypt_message" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">encrypt_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">b'\x7f=%C\x92\xd3\x91\x82oq\x9c\x90\x97bQF7\x14\x05R\xfa\x1f</span> <span class="pre">\xc2'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../../_modules/sdk_interface/keypair.html#Keypair.encrypt_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sdk_interface.Keypair.encrypt_message" title="Link to this definition"></a></dt>
 <dd><p>Encrypts message with for specified recipient</p>
 <section id="id313">
 <h3>Parameters<a class="headerlink" href="#id313" title="Link to this heading"></a></h3>
@@ -4604,7 +4630,10 @@ kwargs</p>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="sdk interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sdk_interface.utils.html" class="btn btn-neutral float-right" title="sdk_interface.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
