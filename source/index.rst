@@ -11,5 +11,6 @@ Portaldot Developer documentation
    :caption: Contents:
 
    Introduction
+   chain-info
    python-sdk/index
    

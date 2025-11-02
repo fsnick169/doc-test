@@ -9,26 +9,27 @@ Batch call
 
 .. code:: python
 
-   #Python
    from substrateinterface import SubstrateInterface, Keypair
    from substrateinterface.exceptions import SubstrateRequestException
 
-   substrate = SubstrateInterface(
-       url="ws://127.0.0.1:9944"
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
    )
 
    keypair = Keypair.create_from_uri('//Alice')
 
-   balance_call = substrate.compose_call(
+   balance_call = portaldot.compose_call(
        call_module='Balances',
        call_function='transfer_keep_alive',
        call_params={
            'dest': '5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty',
-           'value': 1 * 10**15
+           'value': 1 * 10 ** 14
        }
    )
 
-   call = substrate.compose_call(
+   call = portaldot.compose_call(
        call_module='Utility',
        call_function='batch',
        call_params={
@@ -36,7 +37,7 @@ Batch call
        }
    )
 
-   extrinsic = substrate.create_signed_extrinsic(
+   extrinsic = portaldot.create_signed_extrinsic(
        call=call,
        keypair=keypair,
        era={'period': 64}
@@ -44,7 +45,7 @@ Batch call
 
 
    try:
-       receipt = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=True)
+       receipt = portaldot.submit_extrinsic(extrinsic, wait_for_inclusion=True)
 
        print('Extrinsic "{}" included in block "{}"'.format(
            receipt.extrinsic_hash, receipt.block_hash
@@ -52,12 +53,12 @@ Batch call
 
        if receipt.is_success:
 
-           print('✅ Success, triggered events:')
+           print('Success, triggered events:')
            for event in receipt.triggered_events:
                print(f'* {event.value}')
 
        else:
-           print('⚠️ Extrinsic Failed: ', receipt.error_message)
+           print('Extrinsic Failed: ', receipt.error_message)
 
 
    except SubstrateRequestException as e:
@@ -70,28 +71,25 @@ Fee info
 
    from substrateinterface import SubstrateInterface, Keypair
 
-
-   # import logging
-   # logging.basicConfig(level=logging.DEBUG)
-
-
-   substrate = SubstrateInterface(
-       url="ws://127.0.0.1:9944"
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
    )
 
    keypair = Keypair.create_from_uri('//Alice')
 
-   call = substrate.compose_call(
+   call = portaldot.compose_call(
        call_module='Balances',
        call_function='transfer_keep_alive',
        call_params={
            'dest': '5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty',
-           'value': 1 * 10**15
+           'value': 1 * 10 ** 14
        }
    )
 
    # Get payment info
-   payment_info = substrate.get_payment_info(call=call, keypair=keypair)
+   payment_info = portaldot.get_payment_info(call=call, keypair=keypair)
 
    print("Payment info: ", payment_info)
 
@@ -102,11 +100,13 @@ Query a Mapped storage function
 
    from substrateinterface import SubstrateInterface
 
-   substrate = SubstrateInterface(
-       url="ws://127.0.0.1:9944"
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
    )
 
-   result = substrate.query_map("System", "Account", max_results=100)
+   result = portaldot.query_map("System", "Account", max_results=100)
 
    for account, account_info in result:
        print(f'* {account.value}: {account_info.value}')
@@ -118,14 +118,18 @@ Multisig transaction
 
    from substrateinterface import SubstrateInterface, Keypair
 
-   substrate = SubstrateInterface(url="ws://127.0.0.1:9944")
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
+   )
 
-   keypair_alice = Keypair.create_from_uri('//Alice', ss58_format=substrate.ss58_format)
-   keypair_bob = Keypair.create_from_uri('//Bob', ss58_format=substrate.ss58_format)
-   keypair_charlie = Keypair.create_from_uri('//Charlie', ss58_format=substrate.ss58_format)
+   keypair_alice = Keypair.create_from_uri('//Alice', ss58_format=portaldot.ss58_format)
+   keypair_bob = Keypair.create_from_uri('//Bob', ss58_format=portaldot.ss58_format)
+   keypair_charlie = Keypair.create_from_uri('//Charlie', ss58_format=portaldot.ss58_format)
 
    # Generate multi-sig account from signatories and threshold
-   multisig_account = substrate.generate_multisig_account(
+   multisig_account = portaldot.generate_multisig_account(
        signatories=[
            keypair_alice.ss58_address,
            keypair_bob.ss58_address,
@@ -134,33 +138,33 @@ Multisig transaction
        threshold=2
    )
 
-   call = substrate.compose_call(
+   call = portaldot.compose_call(
        call_module='Balances',
        call_function='transfer_keep_alive',
        call_params={
            'dest': keypair_alice.ss58_address,
-           'value': 3 * 10 ** 3
+           'value': 3 * 10 ** 14
        }
    )
 
    # Initiate multisig tx
-   extrinsic = substrate.create_multisig_extrinsic(call, keypair_alice, multisig_account, era={'period': 64})
+   extrinsic = portaldot.create_multisig_extrinsic(call, keypair_alice, multisig_account, era={'period': 64})
 
-   receipt = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=True)
+   receipt = portaldot.submit_extrinsic(extrinsic, wait_for_inclusion=True)
 
    if not receipt.is_success:
-       print(f"⚠️ {receipt.error_message}")
+       print(f"{receipt.error_message}")
        exit()
 
    # Finalize multisig tx with other signatory
-   extrinsic = substrate.create_multisig_extrinsic(call, keypair_bob, multisig_account, era={'period': 64})
+   extrinsic = portaldot.create_multisig_extrinsic(call, keypair_bob, multisig_account, era={'period': 64})
 
-   receipt = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=True)
+   receipt = portaldot.submit_extrinsic(extrinsic, wait_for_inclusion=True)
 
    if receipt.is_success:
-       print(f"✅ {receipt.triggered_events}")
+       print(f"{receipt.triggered_events}")
    else:
-       print(f"⚠️ {receipt.error_message}")
+       print(f"{receipt.error_message}")
 
 Create and call ink! contract
 -----------------------------
@@ -172,15 +176,17 @@ Create and call ink! contract
    from substrateinterface.contracts import ContractCode, ContractInstance
    from substrateinterface import SubstrateInterface, Keypair
 
-   substrate = SubstrateInterface(
-       url="ws://127.0.0.1:9944"
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
    )
 
    keypair = Keypair.create_from_uri('//Alice')
    contract_address = "5GhwarrVMH8kjb8XyW6zCfURHbHy3v84afzLbADyYYX6H2Kk"
 
    # Check if contract is on chain
-   contract_info = substrate.query("Contracts", "ContractInfoOf", [contract_address])
+   contract_info = portaldot.query("Contracts", "ContractInfoOf", [contract_address])
 
    if contract_info.value:
 
@@ -190,7 +196,7 @@ Create and call ink! contract
        contract = ContractInstance.create_from_address(
            contract_address=contract_address,
            metadata_file=os.path.join(os.path.dirname(__file__), 'assets', 'flipper.json'),
-           substrate=substrate
+           portaldot=portaldot
        )
    else:
 
@@ -198,7 +204,7 @@ Create and call ink! contract
        code = ContractCode.create_from_contract_files(
            metadata_file=os.path.join(os.path.dirname(__file__), 'assets', 'flipper.json'),
            wasm_file=os.path.join(os.path.dirname(__file__), 'assets', 'flipper.wasm'),
-           substrate=substrate
+           portaldot=portaldot
        )
 
        # Deploy contract
@@ -212,7 +218,7 @@ Create and call ink! contract
            upload_code=True
        )
 
-       print(f'✅ Deployed @ {contract.contract_address}')
+       print(f'Deployed @ {contract.contract_address}')
 
    # Read current value
    result = contract.read(keypair, 'get')
@@ -246,19 +252,23 @@ Historic balance
 
    from substrateinterface import SubstrateInterface
 
-   substrate = SubstrateInterface(url="ws://127.0.0.1:9944")
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
+   )
 
    block_number = 10
-   block_hash = substrate.get_block_hash(block_number)
+   block_hash = portaldot.get_block_hash(block_number)
 
-   result = substrate.query(
+   result = portaldot.query(
        "System", "Account", ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"], block_hash=block_hash
    )
 
 
    def format_balance(amount: int):
-       amount = format(amount / 10**substrate.properties.get('tokenDecimals', 0), ".15g")
-       return f"{amount} {substrate.properties.get('tokenSymbol', 'UNIT')}"
+       amount = format(amount / 10**portaldot.properties.get('tokenDecimals', 0), ".15g")
+       return f"{amount} {portaldot.properties.get('tokenSymbol', 'UNIT')}"
 
 
    balance = (result.value["data"]["free"] + result.value["data"]["reserved"])
@@ -272,13 +282,17 @@ Block headers subscription
 
    from substrateinterface import SubstrateInterface
 
-   substrate = SubstrateInterface(url="ws://127.0.0.1:9944")
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
+   )
 
 
    def subscription_handler(obj, update_nr, subscription_id):
        print(f"New block #{obj['header']['number']}")
 
-       block = substrate.get_block(block_number=obj['header']['number'])
+       block = portaldot.get_block(block_number=obj['header']['number'])
 
        for idx, extrinsic in enumerate(block['extrinsics']):
            print(f'# {idx}:  {extrinsic.value}')
@@ -287,7 +301,7 @@ Block headers subscription
            return {'message': 'Subscription will cancel when a value is returned', 'updates_processed': update_nr}
 
 
-   result = substrate.subscribe_block_headers(subscription_handler)
+   result = portaldot.subscribe_block_headers(subscription_handler)
    print(result)
 
 Storage subscription
@@ -297,8 +311,10 @@ Storage subscription
 
    from substrateinterface import SubstrateInterface
 
-   substrate = SubstrateInterface(
-       url="ws://127.0.0.1:9944"
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
    )
 
 
@@ -316,7 +332,7 @@ Storage subscription
            return account_info_obj
 
 
-   result = substrate.query("System", "Account", ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"],
+   result = portaldot.query("System", "Account", ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"],
                             subscription_handler=subscription_handler)
 
    print(result)
@@ -333,18 +349,22 @@ Subscribe to multiple storage keys
        print(f"Update for {storage_key.params[0]}: {updated_obj.value}")
 
 
-   substrate = SubstrateInterface(url="ws://127.0.0.1:9944")
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
+   )
 
    # Accounts to track
    storage_keys = [
-       substrate.create_storage_key(
+       portaldot.create_storage_key(
            "System", "Account", ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"]
        ),
-       substrate.create_storage_key(
+       portaldot.create_storage_key(
            "System", "Account", ["5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"]
        )
    ]
 
-   result = substrate.subscribe_storage(
+   result = portaldot.subscribe_storage(
        storage_keys=storage_keys, subscription_handler=subscription_handler
    )

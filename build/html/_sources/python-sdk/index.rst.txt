@@ -6,4 +6,6 @@ Python SDK
    
    Install
    Examples
+   usage/usage
    Reference/modules
+   

@@ -47,18 +47,16 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chain-info.html">Chain Info</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Python SDK</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Install</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-using-pypi">Install using PyPI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#quick-usage">Quick usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#balance-information-of-an-account">Balance information of an account</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-balance-transfer-extrinsic">Create balance transfer extrinsic</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-usage">Quick usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/usage.html">Usages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Reference/modules.html">sdk interface</a></li>
 </ul>
 </li>
@@ -95,34 +93,34 @@
 </div>
 <section id="install-using-pypi">
 <h2>Install using PyPI<a class="headerlink" href="#install-using-pypi" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>substrate-interface
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># bash</span>
+pip<span class="w"> </span>install<span class="w"> </span>substrate-interface
 </pre></div>
 </div>
 </section>
 <section id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">substrate</span> <span class="o">=</span> <span class="n">SubstrateInterface</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;ws://127.0.0.1:9944&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">portaldot</span> <span class="o">=</span> <span class="n">SubstrateInterface</span><span class="p">(</span>
+   <span class="n">url</span><span class="o">=</span><span class="s2">&quot;wss://mainnet.portaldot.io&quot;</span><span class="p">,</span>
+   <span class="n">ss58_format</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+   <span class="n">type_registry_preset</span><span class="o">=</span><span class="s1">&#39;default&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>After connecting certain properties like <code class="docutils literal notranslate"><span class="pre">ss58_format</span></code> will be
-determined automatically by querying the RPC node. At the moment this
-will work for most <code class="docutils literal notranslate"><span class="pre">MetadataV14</span></code> and above runtimes like Polkadot,
-Kusama, Acala, Moonbeam. For older or runtimes under development the
-<code class="docutils literal notranslate"><span class="pre">ss58_format</span></code> (default 42) and other properties should be set
-manually.</p>
+<p>If connecting to a local node, <code class="docutils literal notranslate"><span class="pre">url</span></code> should be setting as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;ws://127.0.0.1:9944&quot;</span>
+</pre></div>
+</div>
 </section>
 <section id="quick-usage">
 <h2>Quick usage<a class="headerlink" href="#quick-usage" title="Link to this heading"></a></h2>
-<section id="balance-information-of-an-account">
-<h3>Balance information of an account<a class="headerlink" href="#balance-information-of-an-account" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">substrate</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;System&#39;</span><span class="p">,</span> <span class="s1">&#39;Account&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;F4xQKRUagnSGjFqafyhajLs94e7Vvzvr8ebwYJceKpr8R7T&#39;</span><span class="p">])</span>
+<p><strong>Balance information of an account</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">portaldot</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;System&#39;</span><span class="p">,</span> <span class="s1">&#39;Account&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;5E9oDs9PjpsBbxXxRE9uMaZZhnBAV38n2ouLB28oecBDdeQo&#39;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;free&#39;</span><span class="p">])</span> <span class="c1"># 635278638077956496</span>
 </pre></div>
 </div>
-</section>
-<section id="create-balance-transfer-extrinsic">
-<h3>Create balance transfer extrinsic<a class="headerlink" href="#create-balance-transfer-extrinsic" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">call</span> <span class="o">=</span> <span class="n">substrate</span><span class="o">.</span><span class="n">compose_call</span><span class="p">(</span>
+<p><strong>Create balance transfer extrinsic</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">call</span> <span class="o">=</span> <span class="n">portaldot</span><span class="o">.</span><span class="n">compose_call</span><span class="p">(</span>
     <span class="n">call_module</span><span class="o">=</span><span class="s1">&#39;Balances&#39;</span><span class="p">,</span>
     <span class="n">call_function</span><span class="o">=</span><span class="s1">&#39;transfer_keep_alive&#39;</span><span class="p">,</span>
     <span class="n">call_params</span><span class="o">=</span><span class="p">{</span>
@@ -131,13 +129,12 @@ manually.</p>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">keypair</span> <span class="o">=</span> <span class="n">Keypair</span><span class="o">.</span><span class="n">create_from_uri</span><span class="p">(</span><span class="s1">&#39;//Alice&#39;</span><span class="p">)</span>
-<span class="n">extrinsic</span> <span class="o">=</span> <span class="n">substrate</span><span class="o">.</span><span class="n">create_signed_extrinsic</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">call</span><span class="p">,</span> <span class="n">keypair</span><span class="o">=</span><span class="n">keypair</span><span class="p">)</span>
-<span class="n">receipt</span> <span class="o">=</span> <span class="n">substrate</span><span class="o">.</span><span class="n">submit_extrinsic</span><span class="p">(</span><span class="n">extrinsic</span><span class="p">,</span> <span class="n">wait_for_inclusion</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">extrinsic</span> <span class="o">=</span> <span class="n">portaldot</span><span class="o">.</span><span class="n">create_signed_extrinsic</span><span class="p">(</span><span class="n">call</span><span class="o">=</span><span class="n">call</span><span class="p">,</span> <span class="n">keypair</span><span class="o">=</span><span class="n">keypair</span><span class="p">)</span>
+<span class="n">receipt</span> <span class="o">=</span> <span class="n">portaldot</span><span class="o">.</span><span class="n">submit_extrinsic</span><span class="p">(</span><span class="n">extrinsic</span><span class="p">,</span> <span class="n">wait_for_inclusion</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extrinsic &#39;</span><span class="si">{</span><span class="n">receipt</span><span class="o">.</span><span class="n">extrinsic_hash</span><span class="si">}</span><span class="s2">&#39; sent and included in block &#39;</span><span class="si">{</span><span class="n">receipt</span><span class="o">.</span><span class="n">block_hash</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 

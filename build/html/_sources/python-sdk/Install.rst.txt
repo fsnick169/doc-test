@@ -9,6 +9,7 @@ Install using PyPI
 
 .. code:: bash
 
+   # bash
    pip install substrate-interface
 
 Initialization
@@ -16,32 +17,34 @@ Initialization
 
 .. code:: python
 
-   substrate = SubstrateInterface(url="ws://127.0.0.1:9944")
+   portaldot = SubstrateInterface(
+      url="wss://mainnet.portaldot.io",
+      ss58_format=42,
+      type_registry_preset='default'
+   )
 
-After connecting certain properties like ``ss58_format`` will be
-determined automatically by querying the RPC node. At the moment this
-will work for most ``MetadataV14`` and above runtimes like Polkadot,
-Kusama, Acala, Moonbeam. For older or runtimes under development the
-``ss58_format`` (default 42) and other properties should be set
-manually.
+If connecting to a local node, ``url`` should be setting as 
+
+.. code:: python
+
+   url="ws://127.0.0.1:9944"
+
 
 Quick usage
 -----------
 
-Balance information of an account
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Balance information of an account**
 
 .. code:: python
 
-   result = substrate.query('System', 'Account', ['F4xQKRUagnSGjFqafyhajLs94e7Vvzvr8ebwYJceKpr8R7T'])
+   result = portaldot.query('System', 'Account', ['5E9oDs9PjpsBbxXxRE9uMaZZhnBAV38n2ouLB28oecBDdeQo'])
    print(result.value['data']['free']) # 635278638077956496
 
-Create balance transfer extrinsic
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Create balance transfer extrinsic**
 
 .. code:: python
 
-   call = substrate.compose_call(
+   call = portaldot.compose_call(
        call_module='Balances',
        call_function='transfer_keep_alive',
        call_params={
@@ -50,7 +53,7 @@ Create balance transfer extrinsic
        }
    )
    keypair = Keypair.create_from_uri('//Alice')
-   extrinsic = substrate.create_signed_extrinsic(call=call, keypair=keypair)
-   receipt = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=True)
+   extrinsic = portaldot.create_signed_extrinsic(call=call, keypair=keypair)
+   receipt = portaldot.submit_extrinsic(extrinsic, wait_for_inclusion=True)
 
    print(f"Extrinsic '{receipt.extrinsic_hash}' sent and included in block '{receipt.block_hash}'")
