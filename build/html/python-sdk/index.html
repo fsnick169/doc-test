@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python SDK &mdash; Portaldot Developer v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a6a68382" />
+      <link rel="stylesheet" type="text/css" href="../_static/fonts.css?v=5583d106" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Install" href="Install.html" />
+    <link rel="prev" title="Introduction" href="../Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Portaldot Developer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Install.html">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Reference/modules.html">sdk interface</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Portaldot Developer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/python-sdk/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-sdk">
+<h1>Python SDK<a class="headerlink" href="#python-sdk" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#install-using-pypi">Install using PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#initialization">Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#quick-usage">Quick usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#balance-information-of-an-account">Balance information of an account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#create-balance-transfer-extrinsic">Create balance transfer extrinsic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#batch-call">Batch call</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#fee-info">Fee info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#query-a-mapped-storage-function">Query a Mapped storage function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#multisig-transaction">Multisig transaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#create-and-call-ink-contract">Create and call ink! contract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#historic-balance">Historic balance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#block-headers-subscription">Block headers subscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#storage-subscription">Storage subscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#subscribe-to-multiple-storage-keys">Subscribe to multiple storage keys</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Reference/modules.html">sdk interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Reference/sdk_interface.html">sdk_interface package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.utils.html">sdk_interface.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.base">sdk_interface.base module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.base.ExtrinsicReceipt"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.base.SubstrateInterface"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.constants">sdk_interface.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.contracts">sdk_interface.contracts module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.contracts.ContractCode"><code class="docutils literal notranslate"><span class="pre">ContractCode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.contracts.ContractEvent"><code class="docutils literal notranslate"><span class="pre">ContractEvent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.contracts.ContractExecutionReceipt"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.contracts.ContractInstance"><code class="docutils literal notranslate"><span class="pre">ContractInstance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.contracts.ContractMetadata"><code class="docutils literal notranslate"><span class="pre">ContractMetadata</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.exceptions">sdk_interface.exceptions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.BlockNotFound"><code class="docutils literal notranslate"><span class="pre">BlockNotFound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ContractExecFailedException"><code class="docutils literal notranslate"><span class="pre">ContractExecFailedException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ContractMetadataParseException"><code class="docutils literal notranslate"><span class="pre">ContractMetadataParseException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ContractReadFailedException"><code class="docutils literal notranslate"><span class="pre">ContractReadFailedException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.DeployContractFailedException"><code class="docutils literal notranslate"><span class="pre">DeployContractFailedException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ExtensionCallNotFound"><code class="docutils literal notranslate"><span class="pre">ExtensionCallNotFound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ExtrinsicFailedException"><code class="docutils literal notranslate"><span class="pre">ExtrinsicFailedException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.ExtrinsicNotFound"><code class="docutils literal notranslate"><span class="pre">ExtrinsicNotFound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.StorageFunctionNotFound"><code class="docutils literal notranslate"><span class="pre">StorageFunctionNotFound</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.exceptions.SubstrateRequestException"><code class="docutils literal notranslate"><span class="pre">SubstrateRequestException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.extensions">sdk_interface.extensions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.extensions.Extension"><code class="docutils literal notranslate"><span class="pre">Extension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.extensions.SearchExtension"><code class="docutils literal notranslate"><span class="pre">SearchExtension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.interfaces">sdk_interface.interfaces module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.interfaces.ExtensionInterface"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.key">sdk_interface.key module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.key.DeriveJunction"><code class="docutils literal notranslate"><span class="pre">DeriveJunction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.key.extract_derive_path"><code class="docutils literal notranslate"><span class="pre">extract_derive_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.keypair">sdk_interface.keypair module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.keypair.Keypair"><code class="docutils literal notranslate"><span class="pre">Keypair</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.keypair.KeypairType"><code class="docutils literal notranslate"><span class="pre">KeypairType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface.storage">sdk_interface.storage module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.storage.StorageKey"><code class="docutils literal notranslate"><span class="pre">StorageKey</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Reference/sdk_interface.html#module-sdk_interface">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ContractCode"><code class="docutils literal notranslate"><span class="pre">ContractCode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ContractEvent"><code class="docutils literal notranslate"><span class="pre">ContractEvent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ContractExecutionReceipt"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ContractInstance"><code class="docutils literal notranslate"><span class="pre">ContractInstance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ContractMetadata"><code class="docutils literal notranslate"><span class="pre">ContractMetadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.Extension"><code class="docutils literal notranslate"><span class="pre">Extension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ExtensionInterface"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.ExtrinsicReceipt"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.Keypair"><code class="docutils literal notranslate"><span class="pre">Keypair</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.KeypairType"><code class="docutils literal notranslate"><span class="pre">KeypairType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.MnemonicLanguageCode"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.SearchExtension"><code class="docutils literal notranslate"><span class="pre">SearchExtension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.SubstrateInterface"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Reference/sdk_interface.html#sdk_interface.SubstrateNodeExtension"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Install.html" class="btn btn-neutral float-right" title="Install" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Portaldot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

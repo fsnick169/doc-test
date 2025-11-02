@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sdk_interface.keypair &mdash; Portaldot Developer v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a6a68382" />
+      <link rel="stylesheet" type="text/css" href="../../_static/fonts.css?v=5583d106" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Portaldot Developer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python-sdk/index.html">Python SDK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Portaldot Developer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sdk_interface.keypair</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sdk_interface.keypair</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Python Substrate Interface Library</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright 2018-2023 Stichting Polkascan (Polkascan Foundation).</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1"># http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scalecodec.utils.ss58</span><span class="w"> </span><span class="kn">import</span> <span class="n">ss58_encode</span><span class="p">,</span> <span class="n">ss58_decode</span><span class="p">,</span> <span class="n">get_ss58_format</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scalecodec.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScaleBytes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">binascii</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">base64</span><span class="w"> </span><span class="kn">import</span> <span class="n">b64encode</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nacl.bindings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nacl.public</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">eth_keys.datatypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrivateKey</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEV_PHRASE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigurationError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.key</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_derive_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils.ecdsa_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">mnemonic_to_ecdsa_private_key</span><span class="p">,</span> <span class="n">ecdsa_verify</span><span class="p">,</span> <span class="n">ecdsa_sign</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils.encrypted_json</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode_pair_from_encrypted_json</span><span class="p">,</span> <span class="n">encode_pair</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bip39</span><span class="w"> </span><span class="kn">import</span> <span class="n">bip39_to_mini_secret</span><span class="p">,</span> <span class="n">bip39_generate</span><span class="p">,</span> <span class="n">bip39_validate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sr25519</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ed25519_zebra</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Keypair&#39;</span><span class="p">,</span> <span class="s1">&#39;KeypairType&#39;</span><span class="p">,</span> <span class="s1">&#39;MnemonicLanguageCode&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="KeypairType">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.KeypairType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">KeypairType</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Type of cryptography, used in `Keypair` instance to encrypt and sign data</span>
+
+<span class="sd">    * ED25519 = 0</span>
+<span class="sd">    * SR25519 = 1</span>
+<span class="sd">    * ECDSA = 2</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ED25519</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SR25519</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">ECDSA</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+
+<div class="viewcode-block" id="MnemonicLanguageCode">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MnemonicLanguageCode</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Available language codes to generate mnemonics</span>
+
+<span class="sd">    * ENGLISH = &#39;en&#39;</span>
+<span class="sd">    * CHINESE_SIMPLIFIED = &#39;zh-hans&#39;</span>
+<span class="sd">    * CHINESE_TRADITIONAL = &#39;zh-hant&#39;</span>
+<span class="sd">    * FRENCH = &#39;fr&#39;</span>
+<span class="sd">    * ITALIAN = &#39;it&#39;</span>
+<span class="sd">    * JAPANESE = &#39;ja&#39;</span>
+<span class="sd">    * KOREAN = &#39;ko&#39;</span>
+<span class="sd">    * SPANISH = &#39;es&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ENGLISH</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
+    <span class="n">CHINESE_SIMPLIFIED</span> <span class="o">=</span> <span class="s1">&#39;zh-hans&#39;</span>
+    <span class="n">CHINESE_TRADITIONAL</span> <span class="o">=</span> <span class="s1">&#39;zh-hant&#39;</span>
+    <span class="n">FRENCH</span> <span class="o">=</span> <span class="s1">&#39;fr&#39;</span>
+    <span class="n">ITALIAN</span> <span class="o">=</span> <span class="s1">&#39;it&#39;</span>
+    <span class="n">JAPANESE</span> <span class="o">=</span> <span class="s1">&#39;ja&#39;</span>
+    <span class="n">KOREAN</span> <span class="o">=</span> <span class="s1">&#39;ko&#39;</span>
+    <span class="n">SPANISH</span> <span class="o">=</span> <span class="s1">&#39;es&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="Keypair">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Keypair</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ss58_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">public_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">private_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ss58_format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">seed_hex</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">crypto_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows generation of Keypairs from a variety of input combination, such as a public/private key combination,</span>
+<span class="sd">        mnemonic or URI containing soft and hard derivation paths. With these Keypairs data can be signed and verified</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ss58_address: Substrate address</span>
+<span class="sd">        public_key: hex string or bytes of public_key key</span>
+<span class="sd">        private_key: hex string or bytes of private key</span>
+<span class="sd">        ss58_format: Substrate address format, default to 42 when omitted</span>
+<span class="sd">        seed_hex: hex string of seed</span>
+<span class="sd">        crypto_type: Use KeypairType.SR25519 or KeypairType.ED25519 cryptography for generating the Keypair</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">=</span> <span class="n">crypto_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed_hex</span> <span class="o">=</span> <span class="n">seed_hex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derive_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">crypto_type</span> <span class="o">!=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span> <span class="ow">and</span> <span class="n">ss58_address</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">public_key</span><span class="p">:</span>
+            <span class="n">public_key</span> <span class="o">=</span> <span class="n">ss58_decode</span><span class="p">(</span><span class="n">ss58_address</span><span class="p">,</span> <span class="n">valid_ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">private_key</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">private_key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">private_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">64</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Secret key should be 64 bytes long&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">public_key</span><span class="p">:</span>
+                    <span class="n">public_key</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">public_from_secret_key</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">:</span>
+                <span class="n">private_key_obj</span> <span class="o">=</span> <span class="n">PrivateKey</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
+                <span class="n">public_key</span> <span class="o">=</span> <span class="n">private_key_obj</span><span class="o">.</span><span class="n">public_key</span><span class="o">.</span><span class="n">to_address</span><span class="p">()</span>
+                <span class="n">ss58_address</span> <span class="o">=</span> <span class="n">private_key_obj</span><span class="o">.</span><span class="n">public_key</span><span class="o">.</span><span class="n">to_checksum_address</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">public_key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No SS58 formatted address or public key provided&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">public_key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">public_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">20</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Public key should be 20 bytes long&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">public_key</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">32</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Public key should be 32 bytes long&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ss58_address</span><span class="p">:</span>
+                <span class="n">ss58_address</span> <span class="o">=</span> <span class="n">ss58_encode</span><span class="p">(</span><span class="n">public_key</span><span class="p">,</span> <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss58_format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">ss58_format</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">public_key</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss58_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">ss58_address</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">private_key</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mnemonic</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Keypair.generate_mnemonic">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.generate_mnemonic">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_mnemonic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">language_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">MnemonicLanguageCode</span><span class="o">.</span><span class="n">ENGLISH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a new seed phrase with given amount of words (default 12)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        words: The amount of words to generate, valid values are 12, 15, 18, 21 and 24</span>
+<span class="sd">        language_code: The language to use, valid values are: &#39;en&#39;, &#39;zh-hans&#39;, &#39;zh-hant&#39;, &#39;fr&#39;, &#39;it&#39;, &#39;ja&#39;, &#39;ko&#39;, &#39;es&#39;. Defaults to `MnemonicLanguageCode.ENGLISH`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str: Seed phrase</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">bip39_generate</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">language_code</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Keypair.validate_mnemonic">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.validate_mnemonic">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_mnemonic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mnemonic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">language_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">MnemonicLanguageCode</span><span class="o">.</span><span class="n">ENGLISH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verify if specified mnemonic is valid</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mnemonic: Seed phrase</span>
+<span class="sd">        language_code: The language to use, valid values are: &#39;en&#39;, &#39;zh-hans&#39;, &#39;zh-hant&#39;, &#39;fr&#39;, &#39;it&#39;, &#39;ja&#39;, &#39;ko&#39;, &#39;es&#39;. Defaults to `MnemonicLanguageCode.ENGLISH`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">bip39_validate</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">,</span> <span class="n">language_code</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Keypair.create_from_mnemonic">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.create_from_mnemonic">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_mnemonic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mnemonic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ss58_format</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">,</span>
+                             <span class="n">language_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">MnemonicLanguageCode</span><span class="o">.</span><span class="n">ENGLISH</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Keypair&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a Keypair for given memonic</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mnemonic: Seed phrase</span>
+<span class="sd">        ss58_format: Substrate address format</span>
+<span class="sd">        crypto_type: Use `KeypairType.SR25519` or `KeypairType.ED25519` cryptography for generating the Keypair</span>
+<span class="sd">        language_code: The language to use, valid values are: &#39;en&#39;, &#39;zh-hans&#39;, &#39;zh-hant&#39;, &#39;fr&#39;, &#39;it&#39;, &#39;ja&#39;, &#39;ko&#39;, &#39;es&#39;. Defaults to `MnemonicLanguageCode.ENGLISH`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Keypair</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">language_code</span> <span class="o">!=</span> <span class="n">MnemonicLanguageCode</span><span class="o">.</span><span class="n">ENGLISH</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ECDSA mnemonic only supports english&quot;</span><span class="p">)</span>
+
+            <span class="n">private_key</span> <span class="o">=</span> <span class="n">mnemonic_to_ecdsa_private_key</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">)</span>
+            <span class="n">keypair</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">create_from_private_key</span><span class="p">(</span><span class="n">private_key</span><span class="p">,</span> <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">seed_array</span> <span class="o">=</span> <span class="n">bip39_to_mini_secret</span><span class="p">(</span><span class="n">mnemonic</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">language_code</span><span class="p">)</span>
+
+            <span class="n">keypair</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">create_from_seed</span><span class="p">(</span>
+                <span class="n">seed_hex</span><span class="o">=</span><span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">seed_array</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">),</span>
+                <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span>
+                <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span>
+            <span class="p">)</span>
+
+        <span class="n">keypair</span><span class="o">.</span><span class="n">mnemonic</span> <span class="o">=</span> <span class="n">mnemonic</span>
+
+        <span class="k">return</span> <span class="n">keypair</span></div>
+
+
+<div class="viewcode-block" id="Keypair.create_from_seed">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.create_from_seed">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_seed</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span> <span class="n">seed_hex</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">ss58_format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Keypair&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a Keypair for given seed</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        seed_hex: hex string of seed</span>
+<span class="sd">        ss58_format: Substrate address format</span>
+<span class="sd">        crypto_type: Use KeypairType.SR25519 or KeypairType.ED25519 cryptography for generating the Keypair</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Keypair</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">seed_hex</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">seed_hex</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">seed_hex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">:</span>
+            <span class="n">public_key</span><span class="p">,</span> <span class="n">private_key</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">pair_from_seed</span><span class="p">(</span><span class="n">seed_hex</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ED25519</span><span class="p">:</span>
+            <span class="n">private_key</span><span class="p">,</span> <span class="n">public_key</span> <span class="o">=</span> <span class="n">ed25519_zebra</span><span class="o">.</span><span class="n">ed_from_seed</span><span class="p">(</span><span class="n">seed_hex</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;crypto_type &quot;</span><span class="si">{}</span><span class="s1">&quot; not supported&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">crypto_type</span><span class="p">))</span>
+
+        <span class="n">ss58_address</span> <span class="o">=</span> <span class="n">ss58_encode</span><span class="p">(</span><span class="n">public_key</span><span class="p">,</span> <span class="n">ss58_format</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">ss58_address</span><span class="o">=</span><span class="n">ss58_address</span><span class="p">,</span> <span class="n">public_key</span><span class="o">=</span><span class="n">public_key</span><span class="p">,</span> <span class="n">private_key</span><span class="o">=</span><span class="n">private_key</span><span class="p">,</span>
+            <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span><span class="p">,</span> <span class="n">seed_hex</span><span class="o">=</span><span class="n">seed_hex</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Keypair.create_from_uri">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.create_from_uri">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_uri</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span> <span class="n">suri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ss58_format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">,</span> <span class="n">language_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">MnemonicLanguageCode</span><span class="o">.</span><span class="n">ENGLISH</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Keypair&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates Keypair for specified suri in following format: `[mnemonic]/[soft-path]//[hard-path]`</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        suri:</span>
+<span class="sd">        ss58_format: Substrate address format</span>
+<span class="sd">        crypto_type: Use KeypairType.SR25519 or KeypairType.ED25519 cryptography for generating the Keypair</span>
+<span class="sd">        language_code: The language to use, valid values are: &#39;en&#39;, &#39;zh-hans&#39;, &#39;zh-hant&#39;, &#39;fr&#39;, &#39;it&#39;, &#39;ja&#39;, &#39;ko&#39;, &#39;es&#39;. Defaults to `MnemonicLanguageCode.ENGLISH`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Keypair</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">suri</span> <span class="ow">and</span> <span class="n">suri</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+            <span class="n">suri</span> <span class="o">=</span> <span class="n">DEV_PHRASE</span> <span class="o">+</span> <span class="n">suri</span>
+
+        <span class="n">suri_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(?P&lt;phrase&gt;.[^/]+( .[^/]+)*)(?P&lt;path&gt;(//?[^/]+)*)(///(?P&lt;password&gt;.*))?$&#39;</span><span class="p">,</span> <span class="n">suri</span><span class="p">)</span>
+
+        <span class="n">suri_parts</span> <span class="o">=</span> <span class="n">suri_regex</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">language_code</span> <span class="o">!=</span> <span class="n">MnemonicLanguageCode</span><span class="o">.</span><span class="n">ENGLISH</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ECDSA mnemonic only supports english&quot;</span><span class="p">)</span>
+
+            <span class="n">private_key</span> <span class="o">=</span> <span class="n">mnemonic_to_ecdsa_private_key</span><span class="p">(</span>
+                <span class="n">mnemonic</span><span class="o">=</span><span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;phrase&#39;</span><span class="p">],</span>
+                <span class="n">str_derivation_path</span><span class="o">=</span><span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span>
+                <span class="n">passphrase</span><span class="o">=</span><span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span>
+            <span class="p">)</span>
+            <span class="n">derived_keypair</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">create_from_private_key</span><span class="p">(</span><span class="n">private_key</span><span class="p">,</span> <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Passwords in suri not supported for crypto_type &#39;</span><span class="si">{</span><span class="n">crypto_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+            <span class="n">derived_keypair</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">create_from_mnemonic</span><span class="p">(</span>
+                <span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;phrase&#39;</span><span class="p">],</span> <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span><span class="p">,</span> <span class="n">language_code</span><span class="o">=</span><span class="n">language_code</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+
+                <span class="n">derived_keypair</span><span class="o">.</span><span class="n">derive_path</span> <span class="o">=</span> <span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">crypto_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Derivation paths for this crypto type not supported&#39;</span><span class="p">)</span>
+
+                <span class="n">derive_junctions</span> <span class="o">=</span> <span class="n">extract_derive_path</span><span class="p">(</span><span class="n">suri_parts</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">])</span>
+
+                <span class="n">child_pubkey</span> <span class="o">=</span> <span class="n">derived_keypair</span><span class="o">.</span><span class="n">public_key</span>
+                <span class="n">child_privkey</span> <span class="o">=</span> <span class="n">derived_keypair</span><span class="o">.</span><span class="n">private_key</span>
+
+                <span class="k">for</span> <span class="n">junction</span> <span class="ow">in</span> <span class="n">derive_junctions</span><span class="p">:</span>
+
+                    <span class="k">if</span> <span class="n">junction</span><span class="o">.</span><span class="n">is_hard</span><span class="p">:</span>
+
+                        <span class="n">_</span><span class="p">,</span> <span class="n">child_pubkey</span><span class="p">,</span> <span class="n">child_privkey</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">hard_derive_keypair</span><span class="p">(</span>
+                            <span class="p">(</span><span class="n">junction</span><span class="o">.</span><span class="n">chain_code</span><span class="p">,</span> <span class="n">child_pubkey</span><span class="p">,</span> <span class="n">child_privkey</span><span class="p">),</span>
+                            <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+                        <span class="p">)</span>
+
+                    <span class="k">else</span><span class="p">:</span>
+
+                        <span class="n">_</span><span class="p">,</span> <span class="n">child_pubkey</span><span class="p">,</span> <span class="n">child_privkey</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">derive_keypair</span><span class="p">(</span>
+                            <span class="p">(</span><span class="n">junction</span><span class="o">.</span><span class="n">chain_code</span><span class="p">,</span> <span class="n">child_pubkey</span><span class="p">,</span> <span class="n">child_privkey</span><span class="p">),</span>
+                            <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+                        <span class="p">)</span>
+
+                <span class="n">derived_keypair</span> <span class="o">=</span> <span class="n">Keypair</span><span class="p">(</span><span class="n">public_key</span><span class="o">=</span><span class="n">child_pubkey</span><span class="p">,</span> <span class="n">private_key</span><span class="o">=</span><span class="n">child_privkey</span><span class="p">,</span> <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">derived_keypair</span></div>
+
+
+<div class="viewcode-block" id="Keypair.create_from_private_key">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.create_from_private_key">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_private_key</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span> <span class="n">private_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">public_key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ss58_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">ss58_format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">crypto_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Keypair&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates Keypair for specified public/private keys</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        private_key: hex string or bytes of private key</span>
+<span class="sd">        public_key: hex string or bytes of public key</span>
+<span class="sd">        ss58_address: Substrate address</span>
+<span class="sd">        ss58_format: Substrate address format, default = 42</span>
+<span class="sd">        crypto_type: Use KeypairType.[SR25519|ED25519|ECDSA] cryptography for generating the Keypair</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Keypair</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">ss58_address</span><span class="o">=</span><span class="n">ss58_address</span><span class="p">,</span> <span class="n">public_key</span><span class="o">=</span><span class="n">public_key</span><span class="p">,</span> <span class="n">private_key</span><span class="o">=</span><span class="n">private_key</span><span class="p">,</span>
+            <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Keypair.create_from_encrypted_json">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.create_from_encrypted_json">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_from_encrypted_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="n">passphrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                   <span class="n">ss58_format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Keypair&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a Keypair from a PolkadotJS format encrypted JSON file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        json_data: Dict or JSON string containing PolkadotJS export format</span>
+<span class="sd">        passphrase: Used to encrypt the keypair</span>
+<span class="sd">        ss58_format: Which network ID to use to format the SS58 address (42 for testnet)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Keypair</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+
+        <span class="n">private_key</span><span class="p">,</span> <span class="n">public_key</span> <span class="o">=</span> <span class="n">decode_pair_from_encrypted_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;sr25519&#39;</span> <span class="ow">in</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;encoding&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
+            <span class="n">crypto_type</span> <span class="o">=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span>
+        <span class="k">elif</span> <span class="s1">&#39;ed25519&#39;</span> <span class="ow">in</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;encoding&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
+            <span class="n">crypto_type</span> <span class="o">=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ED25519</span>
+            <span class="c1"># Strip the nonce part of the private key</span>
+            <span class="n">private_key</span> <span class="o">=</span> <span class="n">private_key</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">32</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Unknown KeypairType found in JSON&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ss58_format</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;address&#39;</span> <span class="ow">in</span> <span class="n">json_data</span><span class="p">:</span>
+            <span class="n">ss58_format</span> <span class="o">=</span> <span class="n">get_ss58_format</span><span class="p">(</span><span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">create_from_private_key</span><span class="p">(</span><span class="n">private_key</span><span class="p">,</span> <span class="n">public_key</span><span class="p">,</span> <span class="n">ss58_format</span><span class="o">=</span><span class="n">ss58_format</span><span class="p">,</span> <span class="n">crypto_type</span><span class="o">=</span><span class="n">crypto_type</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Keypair.export_to_encrypted_json">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.export_to_encrypted_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_to_encrypted_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Export Keypair to PolkadotJS format encrypted JSON file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        passphrase: Used to encrypt the keypair</span>
+<span class="sd">        name: Display name of Keypair used</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss58_address</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">!=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot create JSON for crypto_type &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Secret key from PolkadotJS is an Ed25519 expanded secret key, so has to be converted</span>
+        <span class="c1"># https://github.com/polkadot-js/wasm/blob/master/packages/wasm-crypto/src/rs/sr25519.rs#L125</span>
+        <span class="n">converted_private_key</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">convert_secret_key_to_ed25519</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">)</span>
+
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">encode_pair</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span> <span class="n">converted_private_key</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">)</span>
+
+        <span class="n">json_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;encoded&quot;</span><span class="p">:</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+            <span class="s2">&quot;encoding&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pkcs8&quot;</span><span class="p">,</span> <span class="s2">&quot;sr25519&quot;</span><span class="p">],</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;scrypt&quot;</span><span class="p">,</span> <span class="s2">&quot;xsalsa20-poly1305&quot;</span><span class="p">],</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss58_address</span><span class="p">,</span>
+            <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;whenCreated&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">json_data</span></div>
+
+
+<div class="viewcode-block" id="Keypair.sign">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.sign">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ScaleBytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a signature for given data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data: data to sign in `Scalebytes`, bytes or hex string format</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        signature in bytes</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ScaleBytes</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0x&#39;</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s1">&#39;No private key set to create signatures&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">:</span>
+            <span class="n">signature</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">sign</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">),</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ED25519</span><span class="p">:</span>
+            <span class="n">signature</span> <span class="o">=</span> <span class="n">ed25519_zebra</span><span class="o">.</span><span class="n">ed_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">:</span>
+            <span class="n">signature</span> <span class="o">=</span> <span class="n">ecdsa_sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s2">&quot;Crypto type not supported&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">signature</span></div>
+
+
+<div class="viewcode-block" id="Keypair.verify">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.verify">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ScaleBytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">signature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies data with specified signature</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data: data to be verified in `Scalebytes`, bytes or hex string format</span>
+<span class="sd">        signature: signature in bytes or hex string format</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        True if data is signed with this Keypair, otherwise False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ScaleBytes</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0x&#39;</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span> <span class="ow">and</span> <span class="n">signature</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0x&#39;</span><span class="p">:</span>
+            <span class="n">signature</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">signature</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">bytes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Signature should be of type bytes or a hex-string&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">SR25519</span><span class="p">:</span>
+            <span class="n">crypto_verify_fn</span> <span class="o">=</span> <span class="n">sr25519</span><span class="o">.</span><span class="n">verify</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ED25519</span><span class="p">:</span>
+            <span class="n">crypto_verify_fn</span> <span class="o">=</span> <span class="n">ed25519_zebra</span><span class="o">.</span><span class="n">ed_verify</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">==</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">:</span>
+            <span class="n">crypto_verify_fn</span> <span class="o">=</span> <span class="n">ecdsa_verify</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s2">&quot;Crypto type not supported&quot;</span><span class="p">)</span>
+
+        <span class="n">verified</span> <span class="o">=</span> <span class="n">crypto_verify_fn</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">verified</span><span class="p">:</span>
+            <span class="c1"># Another attempt with the data wrapped, as discussed in https://github.com/polkadot-js/extension/pull/743</span>
+            <span class="c1"># Note: As Python apps are trusted sources on its own, no need to wrap data when signing from this lib</span>
+            <span class="n">verified</span> <span class="o">=</span> <span class="n">crypto_verify_fn</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&lt;Bytes&gt;&#39;</span> <span class="o">+</span> <span class="n">data</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;&lt;/Bytes&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">verified</span></div>
+
+
+<div class="viewcode-block" id="Keypair.encrypt_message">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.encrypt_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt_message</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">recipient_public_key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">nonce</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_bytes</span><span class="p">(</span><span class="mi">24</span><span class="p">),</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encrypts message with for specified recipient</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        message: message to be encrypted, bytes or string</span>
+<span class="sd">        recipient_public_key: recipient&#39;s public key</span>
+<span class="sd">        nonce: the nonce to use in the encryption</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Encrypted message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s1">&#39;No private key set to encrypt&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">!=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ED25519</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s1">&#39;Only ed25519 keypair type supported&#39;</span><span class="p">)</span>
+        <span class="n">curve25519_public_key</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">bindings</span><span class="o">.</span><span class="n">crypto_sign_ed25519_pk_to_curve25519</span><span class="p">(</span><span class="n">recipient_public_key</span><span class="p">)</span>
+        <span class="n">recipient</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">public</span><span class="o">.</span><span class="n">PublicKey</span><span class="p">(</span><span class="n">curve25519_public_key</span><span class="p">)</span>
+        <span class="n">private_key</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">bindings</span><span class="o">.</span><span class="n">crypto_sign_ed25519_sk_to_curve25519</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">private_key</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">)</span>
+        <span class="n">sender</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">public</span><span class="o">.</span><span class="n">PrivateKey</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">public</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">recipient</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">box</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">message</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">nonce</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Keypair.decrypt_message">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.keypair.Keypair.decrypt_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encrypted_message_with_nonce</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sender_public_key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrypts message from a specified sender</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        encrypted_message_with_nonce: message to be decrypted</span>
+<span class="sd">        sender_public_key: sender&#39;s public key</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Decrypted message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s1">&#39;No private key set to decrypt&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crypto_type</span> <span class="o">!=</span> <span class="n">KeypairType</span><span class="o">.</span><span class="n">ED25519</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigurationError</span><span class="p">(</span><span class="s1">&#39;Only ed25519 keypair type supported&#39;</span><span class="p">)</span>
+        <span class="n">private_key</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">bindings</span><span class="o">.</span><span class="n">crypto_sign_ed25519_sk_to_curve25519</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">private_key</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="p">)</span>
+        <span class="n">recipient</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">public</span><span class="o">.</span><span class="n">PrivateKey</span><span class="p">(</span><span class="n">private_key</span><span class="p">)</span>
+        <span class="n">curve25519_public_key</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">bindings</span><span class="o">.</span><span class="n">crypto_sign_ed25519_pk_to_curve25519</span><span class="p">(</span><span class="n">sender_public_key</span><span class="p">)</span>
+        <span class="n">sender</span> <span class="o">=</span> <span class="n">nacl</span><span class="o">.</span><span class="n">public</span><span class="o">.</span><span class="n">PublicKey</span><span class="p">(</span><span class="n">curve25519_public_key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nacl</span><span class="o">.</span><span class="n">public</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">sender</span><span class="p">)</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_message_with_nonce</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss58_address</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;Keypair (address=</span><span class="si">{}</span><span class="s1">)&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ss58_address</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;Keypair (public_key=0x</span><span class="si">{}</span><span class="s1">)&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Portaldot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

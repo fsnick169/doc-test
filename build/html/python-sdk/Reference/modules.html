@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sdk interface &mdash; Portaldot Developer v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a6a68382" />
+      <link rel="stylesheet" type="text/css" href="../../_static/fonts.css?v=5583d106" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Portaldot Developer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Python SDK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Portaldot Developer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">sdk interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/python-sdk/Reference/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk-interface">
+<h1>sdk interface<a class="headerlink" href="#sdk-interface" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sdk_interface.html">sdk_interface package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.utils.html">sdk_interface.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#module-sdk_interface.utils.caching">sdk_interface.utils.caching module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#module-sdk_interface.utils.ecdsa_helpers">sdk_interface.utils.ecdsa_helpers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#module-sdk_interface.utils.encrypted_json">sdk_interface.utils.encrypted_json module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#module-sdk_interface.utils.hasher">sdk_interface.utils.hasher module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#module-sdk_interface.utils.ss58">sdk_interface.utils.ss58 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.utils.html#module-sdk_interface.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.base">sdk_interface.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.create_from_extrinsic_identifier"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.create_from_extrinsic_identifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.error_message"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.error_message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.extrinsic"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.extrinsic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.extrinsic_idx"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.extrinsic_idx</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.get"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.get_extrinsic_identifier"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.get_extrinsic_identifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.is_success"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.is_success</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.process_events"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.process_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.retrieve_extrinsic"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.retrieve_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.total_fee_amount"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.total_fee_amount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.triggered_events"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.triggered_events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.ExtrinsicReceipt.weight"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.weight</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.apply_type_registry_presets"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.apply_type_registry_presets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.chain"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.chain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.close"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.compose_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.compose_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.connect_websocket"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.connect_websocket()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.convert_storage_parameter"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.convert_storage_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.create_multisig_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_multisig_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.create_scale_object"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_scale_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.create_signed_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_signed_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.create_storage_key"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_storage_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.create_unsigned_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_unsigned_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.debug_message"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.debug_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.decode_scale"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.decode_scale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.encode_scale"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.encode_scale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.extension_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.extension_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.filter_events"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.filter_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.filter_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.filter_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.generate_multisig_account"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.generate_multisig_account()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.generate_signature_payload"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.generate_signature_payload()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.generate_storage_hash"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.generate_storage_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_account_nonce"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_account_nonce()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block_hash"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block_header"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block_metadata"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block_number"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block_runtime_version"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_runtime_version()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_block_timestamp"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_chain_finalised_head"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_chain_finalised_head()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_chain_head"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_chain_head()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_constant"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_constant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_events"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_call_function"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_call_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_call_functions"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_call_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_constant"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_constant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_constants"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_constants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_error"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_errors"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_errors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_event"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_events"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_module"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_modules"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_modules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_runtime_call_function"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_runtime_call_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_runtime_call_functions"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_runtime_call_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_storage_function"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_storage_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_metadata_storage_functions"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_storage_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_payment_info"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_payment_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_runtime_metadata"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_runtime_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_storage_by_key"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_storage_by_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_type_definition"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_type_definition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.get_type_registry"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_type_registry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.implements_scaleinfo"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.implements_scaleinfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.init_runtime"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.init_runtime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.is_valid_ss58_address"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.is_valid_ss58_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.name"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.properties"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.query"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.query()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.query_map"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.query_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.query_multi"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.query_multi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.register_extension"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.register_extension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.reload_type_registry"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.reload_type_registry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.retrieve_extrinsic_by_hash"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.retrieve_extrinsic_by_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.retrieve_extrinsic_by_identifier"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.retrieve_extrinsic_by_identifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.retrieve_pending_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.retrieve_pending_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.rpc_request"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.rpc_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.runtime_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.runtime_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.search_block_number"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.search_block_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.serialize_constant"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_constant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.serialize_module_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_module_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.serialize_module_error"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_module_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.serialize_module_event"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_module_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.serialize_storage_item"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_storage_item()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.ss58_decode"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.ss58_decode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.ss58_encode"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.ss58_encode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.ss58_format"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.ss58_format</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.submit_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.submit_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.subscribe_block_headers"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.subscribe_block_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.subscribe_storage"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.subscribe_storage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.supports_rpc_method"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.supports_rpc_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.token_decimals"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.token_decimals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.token_symbol"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.token_symbol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.update_type_registry_presets"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.update_type_registry_presets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.base.SubstrateInterface.version"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.version</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.constants">sdk_interface.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.contracts">sdk_interface.contracts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractCode"><code class="docutils literal notranslate"><span class="pre">ContractCode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractCode.create_from_code_hash"><code class="docutils literal notranslate"><span class="pre">ContractCode.create_from_code_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractCode.create_from_contract_files"><code class="docutils literal notranslate"><span class="pre">ContractCode.create_from_contract_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractCode.deploy"><code class="docutils literal notranslate"><span class="pre">ContractCode.deploy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractCode.upload_wasm"><code class="docutils literal notranslate"><span class="pre">ContractCode.upload_wasm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractEvent"><code class="docutils literal notranslate"><span class="pre">ContractEvent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractEvent.process"><code class="docutils literal notranslate"><span class="pre">ContractEvent.process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractEvent.process_encode"><code class="docutils literal notranslate"><span class="pre">ContractEvent.process_encode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractExecutionReceipt"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractExecutionReceipt.contract_events"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt.contract_events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractExecutionReceipt.create_from_extrinsic_receipt"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt.create_from_extrinsic_receipt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractExecutionReceipt.process_events"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt.process_events()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractInstance"><code class="docutils literal notranslate"><span class="pre">ContractInstance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractInstance.create_from_address"><code class="docutils literal notranslate"><span class="pre">ContractInstance.create_from_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractInstance.exec"><code class="docutils literal notranslate"><span class="pre">ContractInstance.exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractInstance.init"><code class="docutils literal notranslate"><span class="pre">ContractInstance.init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractInstance.read"><code class="docutils literal notranslate"><span class="pre">ContractInstance.read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata"><code class="docutils literal notranslate"><span class="pre">ContractMetadata</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.create_from_file"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.create_from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.generate_constructor_data"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.generate_constructor_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.generate_message_data"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.generate_message_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.get_event_data"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_event_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.get_event_id_by_topic"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_event_id_by_topic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.get_return_type_string_for_message"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_return_type_string_for_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.contracts.ContractMetadata.get_type_string_for_metadata_type"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_type_string_for_metadata_type()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.exceptions">sdk_interface.exceptions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.BlockNotFound"><code class="docutils literal notranslate"><span class="pre">BlockNotFound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ContractExecFailedException"><code class="docutils literal notranslate"><span class="pre">ContractExecFailedException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ContractMetadataParseException"><code class="docutils literal notranslate"><span class="pre">ContractMetadataParseException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ContractReadFailedException"><code class="docutils literal notranslate"><span class="pre">ContractReadFailedException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.DeployContractFailedException"><code class="docutils literal notranslate"><span class="pre">DeployContractFailedException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ExtensionCallNotFound"><code class="docutils literal notranslate"><span class="pre">ExtensionCallNotFound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ExtrinsicFailedException"><code class="docutils literal notranslate"><span class="pre">ExtrinsicFailedException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.ExtrinsicNotFound"><code class="docutils literal notranslate"><span class="pre">ExtrinsicNotFound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.StorageFunctionNotFound"><code class="docutils literal notranslate"><span class="pre">StorageFunctionNotFound</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.exceptions.SubstrateRequestException"><code class="docutils literal notranslate"><span class="pre">SubstrateRequestException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.extensions">sdk_interface.extensions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.Extension"><code class="docutils literal notranslate"><span class="pre">Extension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.Extension.close"><code class="docutils literal notranslate"><span class="pre">Extension.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.Extension.debug_message"><code class="docutils literal notranslate"><span class="pre">Extension.debug_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.Extension.init"><code class="docutils literal notranslate"><span class="pre">Extension.init()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SearchExtension"><code class="docutils literal notranslate"><span class="pre">SearchExtension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SearchExtension.filter_events"><code class="docutils literal notranslate"><span class="pre">SearchExtension.filter_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SearchExtension.filter_extrinsics"><code class="docutils literal notranslate"><span class="pre">SearchExtension.filter_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SearchExtension.get_block_timestamp"><code class="docutils literal notranslate"><span class="pre">SearchExtension.get_block_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SearchExtension.search_block_number"><code class="docutils literal notranslate"><span class="pre">SearchExtension.search_block_number()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.filter_events"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.filter_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.filter_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.filter_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.get_block_timestamp"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.get_block_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.search_block_number"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.search_block_number()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.interfaces">sdk_interface.interfaces module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.interfaces.ExtensionInterface"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.interfaces.ExtensionInterface.call"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.interfaces.ExtensionInterface.get_extension_callable"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.get_extension_callable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.interfaces.ExtensionInterface.register"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.register()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.interfaces.ExtensionInterface.unregister_all"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.unregister_all()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.key">sdk_interface.key module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.key.DeriveJunction"><code class="docutils literal notranslate"><span class="pre">DeriveJunction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.key.DeriveJunction.from_derive_path"><code class="docutils literal notranslate"><span class="pre">DeriveJunction.from_derive_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.key.extract_derive_path"><code class="docutils literal notranslate"><span class="pre">extract_derive_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.keypair">sdk_interface.keypair module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair"><code class="docutils literal notranslate"><span class="pre">Keypair</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.create_from_encrypted_json"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_encrypted_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.create_from_mnemonic"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_mnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.create_from_private_key"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_private_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.create_from_seed"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.create_from_uri"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_uri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.decrypt_message"><code class="docutils literal notranslate"><span class="pre">Keypair.decrypt_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.encrypt_message"><code class="docutils literal notranslate"><span class="pre">Keypair.encrypt_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.export_to_encrypted_json"><code class="docutils literal notranslate"><span class="pre">Keypair.export_to_encrypted_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.generate_mnemonic"><code class="docutils literal notranslate"><span class="pre">Keypair.generate_mnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.sign"><code class="docutils literal notranslate"><span class="pre">Keypair.sign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.validate_mnemonic"><code class="docutils literal notranslate"><span class="pre">Keypair.validate_mnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.Keypair.verify"><code class="docutils literal notranslate"><span class="pre">Keypair.verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.KeypairType"><code class="docutils literal notranslate"><span class="pre">KeypairType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.KeypairType.ECDSA"><code class="docutils literal notranslate"><span class="pre">KeypairType.ECDSA</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.KeypairType.ED25519"><code class="docutils literal notranslate"><span class="pre">KeypairType.ED25519</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.KeypairType.SR25519"><code class="docutils literal notranslate"><span class="pre">KeypairType.SR25519</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.CHINESE_SIMPLIFIED"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.CHINESE_SIMPLIFIED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.CHINESE_TRADITIONAL"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.CHINESE_TRADITIONAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.ENGLISH"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.ENGLISH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.FRENCH"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.FRENCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.ITALIAN"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.ITALIAN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.JAPANESE"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.JAPANESE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.KOREAN"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.KOREAN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.keypair.MnemonicLanguageCode.SPANISH"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.SPANISH</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface.storage">sdk_interface.storage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey"><code class="docutils literal notranslate"><span class="pre">StorageKey</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey.convert_storage_parameter"><code class="docutils literal notranslate"><span class="pre">StorageKey.convert_storage_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey.create_from_data"><code class="docutils literal notranslate"><span class="pre">StorageKey.create_from_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey.create_from_storage_function"><code class="docutils literal notranslate"><span class="pre">StorageKey.create_from_storage_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey.decode_scale_value"><code class="docutils literal notranslate"><span class="pre">StorageKey.decode_scale_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey.generate"><code class="docutils literal notranslate"><span class="pre">StorageKey.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.storage.StorageKey.to_hex"><code class="docutils literal notranslate"><span class="pre">StorageKey.to_hex()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_interface.html#module-sdk_interface">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractCode"><code class="docutils literal notranslate"><span class="pre">ContractCode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractCode.create_from_code_hash"><code class="docutils literal notranslate"><span class="pre">ContractCode.create_from_code_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractCode.create_from_contract_files"><code class="docutils literal notranslate"><span class="pre">ContractCode.create_from_contract_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractCode.deploy"><code class="docutils literal notranslate"><span class="pre">ContractCode.deploy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractCode.upload_wasm"><code class="docutils literal notranslate"><span class="pre">ContractCode.upload_wasm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractEvent"><code class="docutils literal notranslate"><span class="pre">ContractEvent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractEvent.process"><code class="docutils literal notranslate"><span class="pre">ContractEvent.process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractEvent.process_encode"><code class="docutils literal notranslate"><span class="pre">ContractEvent.process_encode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractExecutionReceipt"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractExecutionReceipt.contract_events"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt.contract_events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractExecutionReceipt.create_from_extrinsic_receipt"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt.create_from_extrinsic_receipt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractExecutionReceipt.process_events"><code class="docutils literal notranslate"><span class="pre">ContractExecutionReceipt.process_events()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractInstance"><code class="docutils literal notranslate"><span class="pre">ContractInstance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractInstance.create_from_address"><code class="docutils literal notranslate"><span class="pre">ContractInstance.create_from_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractInstance.exec"><code class="docutils literal notranslate"><span class="pre">ContractInstance.exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractInstance.init"><code class="docutils literal notranslate"><span class="pre">ContractInstance.init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractInstance.read"><code class="docutils literal notranslate"><span class="pre">ContractInstance.read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata"><code class="docutils literal notranslate"><span class="pre">ContractMetadata</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.create_from_file"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.create_from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.generate_constructor_data"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.generate_constructor_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.generate_message_data"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.generate_message_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.get_event_data"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_event_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.get_event_id_by_topic"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_event_id_by_topic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.get_return_type_string_for_message"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_return_type_string_for_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ContractMetadata.get_type_string_for_metadata_type"><code class="docutils literal notranslate"><span class="pre">ContractMetadata.get_type_string_for_metadata_type()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.Extension"><code class="docutils literal notranslate"><span class="pre">Extension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Extension.close"><code class="docutils literal notranslate"><span class="pre">Extension.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Extension.debug_message"><code class="docutils literal notranslate"><span class="pre">Extension.debug_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Extension.init"><code class="docutils literal notranslate"><span class="pre">Extension.init()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtensionInterface"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtensionInterface.call"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtensionInterface.get_extension_callable"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.get_extension_callable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtensionInterface.register"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.register()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtensionInterface.unregister_all"><code class="docutils literal notranslate"><span class="pre">ExtensionInterface.unregister_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.create_from_extrinsic_identifier"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.create_from_extrinsic_identifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.error_message"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.error_message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.extrinsic"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.extrinsic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.extrinsic_idx"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.extrinsic_idx</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.get"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.get_extrinsic_identifier"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.get_extrinsic_identifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.is_success"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.is_success</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.process_events"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.process_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.retrieve_extrinsic"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.retrieve_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.total_fee_amount"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.total_fee_amount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.triggered_events"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.triggered_events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.ExtrinsicReceipt.weight"><code class="docutils literal notranslate"><span class="pre">ExtrinsicReceipt.weight</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair"><code class="docutils literal notranslate"><span class="pre">Keypair</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.create_from_encrypted_json"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_encrypted_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.create_from_mnemonic"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_mnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.create_from_private_key"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_private_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.create_from_seed"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.create_from_uri"><code class="docutils literal notranslate"><span class="pre">Keypair.create_from_uri()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.decrypt_message"><code class="docutils literal notranslate"><span class="pre">Keypair.decrypt_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.encrypt_message"><code class="docutils literal notranslate"><span class="pre">Keypair.encrypt_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.export_to_encrypted_json"><code class="docutils literal notranslate"><span class="pre">Keypair.export_to_encrypted_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.generate_mnemonic"><code class="docutils literal notranslate"><span class="pre">Keypair.generate_mnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.sign"><code class="docutils literal notranslate"><span class="pre">Keypair.sign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.validate_mnemonic"><code class="docutils literal notranslate"><span class="pre">Keypair.validate_mnemonic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.Keypair.verify"><code class="docutils literal notranslate"><span class="pre">Keypair.verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.KeypairType"><code class="docutils literal notranslate"><span class="pre">KeypairType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.KeypairType.ECDSA"><code class="docutils literal notranslate"><span class="pre">KeypairType.ECDSA</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.KeypairType.ED25519"><code class="docutils literal notranslate"><span class="pre">KeypairType.ED25519</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.KeypairType.SR25519"><code class="docutils literal notranslate"><span class="pre">KeypairType.SR25519</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.CHINESE_SIMPLIFIED"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.CHINESE_SIMPLIFIED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.CHINESE_TRADITIONAL"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.CHINESE_TRADITIONAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.ENGLISH"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.ENGLISH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.FRENCH"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.FRENCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.ITALIAN"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.ITALIAN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.JAPANESE"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.JAPANESE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.KOREAN"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.KOREAN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.MnemonicLanguageCode.SPANISH"><code class="docutils literal notranslate"><span class="pre">MnemonicLanguageCode.SPANISH</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.SearchExtension"><code class="docutils literal notranslate"><span class="pre">SearchExtension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SearchExtension.filter_events"><code class="docutils literal notranslate"><span class="pre">SearchExtension.filter_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SearchExtension.filter_extrinsics"><code class="docutils literal notranslate"><span class="pre">SearchExtension.filter_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SearchExtension.get_block_timestamp"><code class="docutils literal notranslate"><span class="pre">SearchExtension.get_block_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SearchExtension.search_block_number"><code class="docutils literal notranslate"><span class="pre">SearchExtension.search_block_number()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.apply_type_registry_presets"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.apply_type_registry_presets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.chain"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.chain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.close"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.compose_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.compose_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.connect_websocket"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.connect_websocket()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.convert_storage_parameter"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.convert_storage_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.create_multisig_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_multisig_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.create_scale_object"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_scale_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.create_signed_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_signed_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.create_storage_key"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_storage_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.create_unsigned_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.create_unsigned_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.debug_message"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.debug_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.decode_scale"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.decode_scale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.encode_scale"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.encode_scale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.extension_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.extension_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.filter_events"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.filter_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.filter_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.filter_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.generate_multisig_account"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.generate_multisig_account()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.generate_signature_payload"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.generate_signature_payload()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.generate_storage_hash"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.generate_storage_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_account_nonce"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_account_nonce()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block_hash"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block_header"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block_metadata"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block_number"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block_runtime_version"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_runtime_version()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_block_timestamp"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_block_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_chain_finalised_head"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_chain_finalised_head()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_chain_head"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_chain_head()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_constant"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_constant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_events"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_call_function"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_call_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_call_functions"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_call_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_constant"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_constant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_constants"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_constants()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_error"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_errors"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_errors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_event"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_events"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_module"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_modules"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_modules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_runtime_call_function"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_runtime_call_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_runtime_call_functions"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_runtime_call_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_storage_function"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_storage_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_metadata_storage_functions"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_metadata_storage_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_payment_info"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_payment_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_runtime_metadata"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_runtime_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_storage_by_key"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_storage_by_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_type_definition"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_type_definition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.get_type_registry"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.get_type_registry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.implements_scaleinfo"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.implements_scaleinfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.init_runtime"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.init_runtime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.is_valid_ss58_address"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.is_valid_ss58_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.name"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.properties"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.properties</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.query"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.query()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.query_map"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.query_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.query_multi"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.query_multi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.register_extension"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.register_extension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.reload_type_registry"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.reload_type_registry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.retrieve_extrinsic_by_hash"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.retrieve_extrinsic_by_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.retrieve_extrinsic_by_identifier"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.retrieve_extrinsic_by_identifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.retrieve_pending_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.retrieve_pending_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.rpc_request"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.rpc_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.runtime_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.runtime_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.search_block_number"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.search_block_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.serialize_constant"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_constant()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.serialize_module_call"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_module_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.serialize_module_error"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_module_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.serialize_module_event"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_module_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.serialize_storage_item"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.serialize_storage_item()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.ss58_decode"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.ss58_decode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.ss58_encode"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.ss58_encode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.ss58_format"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.ss58_format</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.submit_extrinsic"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.submit_extrinsic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.subscribe_block_headers"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.subscribe_block_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.subscribe_storage"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.subscribe_storage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.supports_rpc_method"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.supports_rpc_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.token_decimals"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.token_decimals</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.token_symbol"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.token_symbol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.update_type_registry_presets"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.update_type_registry_presets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateInterface.version"><code class="docutils literal notranslate"><span class="pre">SubstrateInterface.version</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateNodeExtension"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateNodeExtension.filter_events"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.filter_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateNodeExtension.filter_extrinsics"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.filter_extrinsics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateNodeExtension.get_block_timestamp"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.get_block_timestamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sdk_interface.html#sdk_interface.SubstrateNodeExtension.search_block_number"><code class="docutils literal notranslate"><span class="pre">SubstrateNodeExtension.search_block_number()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Portaldot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

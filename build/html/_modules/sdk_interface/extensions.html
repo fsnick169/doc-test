@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sdk_interface.extensions &mdash; Portaldot Developer v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a6a68382" />
+      <link rel="stylesheet" type="text/css" href="../../_static/fonts.css?v=5583d106" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Portaldot Developer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python-sdk/index.html">Python SDK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Portaldot Developer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sdk_interface.extensions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sdk_interface.extensions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Python Substrate Interface Library</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright 2018-2023 Stichting Polkascan (Polkascan Foundation).</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1"># http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Extension&#39;</span><span class="p">,</span> <span class="s1">&#39;SearchExtension&#39;</span><span class="p">,</span> <span class="s1">&#39;SubstrateNodeExtension&#39;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">SubstrateInterface</span>
+
+
+<div class="viewcode-block" id="Extension">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.Extension">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Extension</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class of all extensions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Extension.init">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.Extension.init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">substrate</span><span class="p">:</span> <span class="s1">&#39;SubstrateInterface&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization process of the extension. This function is being called by the ExtensionRegistry.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        substrate: SubstrateInterface</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="p">:</span> <span class="s1">&#39;SubstrateInterface&#39;</span> <span class="o">=</span> <span class="n">substrate</span></div>
+
+
+<div class="viewcode-block" id="Extension.close">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.Extension.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cleanup process of the extension. This function is being called by the ExtensionRegistry.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="Extension.debug_message">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.Extension.debug_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">debug_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Submits a debug message in the logger</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        message: str</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">debug_message</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Extension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SearchExtension">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SearchExtension">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SearchExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Type of `Extension` that implements functionality to improve and enhance search capability</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SearchExtension.filter_events">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SearchExtension.filter_events">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filters events to match provided search criteria e.g. block range, pallet name, accountID in attributes</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SearchExtension.filter_extrinsics">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SearchExtension.filter_extrinsics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_extrinsics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filters extrinsics to match provided search criteria e.g. block range, pallet name, signed by accountID</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SearchExtension.search_block_number">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SearchExtension.search_block_number">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">search_block_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_datetime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">block_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search corresponding block number for provided `block_datetime`. the prediction tolerance is provided with</span>
+<span class="sd">        `block_time`</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        block_datetime: datetime</span>
+<span class="sd">        block_time: int</span>
+<span class="sd">        kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SearchExtension.get_block_timestamp">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SearchExtension.get_block_timestamp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_block_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a UNIX timestamp for given `block_number`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        block_number: int The block_number to retrieve the timestamp for</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SubstrateNodeExtension">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SubstrateNodeExtension</span><span class="p">(</span><span class="n">SearchExtension</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implementation of `SearchExtension` using only Substrate RPC methods. Could be significant inefficient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SubstrateNodeExtension.filter_extrinsics">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.filter_extrinsics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_extrinsics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">block_end</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ss58_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="n">pallet_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">call_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">block_end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">block_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_block_number</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">block_start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">block_start</span> <span class="o">=</span> <span class="n">block_end</span>
+
+        <span class="k">if</span> <span class="n">block_start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">block_start</span> <span class="o">+=</span> <span class="n">block_end</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">block_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">block_start</span><span class="p">,</span> <span class="n">block_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">block_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_block_hash</span><span class="p">(</span><span class="n">block_number</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">extrinsic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_extrinsics</span><span class="p">(</span><span class="n">block_hash</span><span class="o">=</span><span class="n">block_hash</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">pallet_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pallet_name</span> <span class="o">!=</span> <span class="n">extrinsic</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;call&#39;</span><span class="p">][</span><span class="s1">&#39;call_module&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">call_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">call_name</span> <span class="o">!=</span> <span class="n">extrinsic</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;call&#39;</span><span class="p">][</span><span class="s1">&#39;call_function&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extrinsic</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_block_range</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_block_range</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">max_block_range</span>
+
+<div class="viewcode-block" id="SubstrateNodeExtension.filter_events">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.filter_events">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">block_end</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pallet_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">event_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">account_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">block_end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">block_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_block_number</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">block_start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">block_start</span> <span class="o">=</span> <span class="n">block_end</span>
+
+        <span class="k">if</span> <span class="n">block_start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">block_start</span> <span class="o">+=</span> <span class="n">block_end</span>
+
+        <span class="c1"># Requirements check</span>
+        <span class="k">if</span> <span class="n">block_end</span> <span class="o">-</span> <span class="n">block_start</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_block_range</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max_block_range (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_block_range</span><span class="si">}</span><span class="s2">) exceeded&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieving events from #</span><span class="si">{</span><span class="n">block_start</span><span class="si">}</span><span class="s2"> to #</span><span class="si">{</span><span class="n">block_end</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">block_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">block_start</span><span class="p">,</span> <span class="n">block_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">block_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_block_hash</span><span class="p">(</span><span class="n">block_number</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_events</span><span class="p">(</span><span class="n">block_hash</span><span class="o">=</span><span class="n">block_hash</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">pallet_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pallet_name</span> <span class="o">!=</span> <span class="n">event</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">][</span><span class="s1">&#39;module_id&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">event_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">event_name</span> <span class="o">!=</span> <span class="n">event</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">][</span><span class="s1">&#39;event_id&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># if account_id is not None:</span>
+                <span class="c1">#     found = False</span>
+                <span class="c1">#     for param in event.params:</span>
+                <span class="c1">#         if param[&#39;type&#39;] == &#39;AccountId&#39; and param[&#39;value&#39;] == account_id:</span>
+                <span class="c1">#             found = True</span>
+                <span class="c1">#             break</span>
+                <span class="c1">#     if not found:</span>
+                <span class="c1">#         continue</span>
+
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="SubstrateNodeExtension.get_block_timestamp">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.get_block_timestamp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_block_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">extrinsics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_extrinsics</span><span class="p">(</span>
+            <span class="n">block_start</span><span class="o">=</span><span class="n">block_number</span><span class="p">,</span> <span class="n">block_end</span><span class="o">=</span><span class="n">block_number</span><span class="p">,</span> <span class="n">pallet_name</span><span class="o">=</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span>
+            <span class="n">call_name</span><span class="o">=</span><span class="s2">&quot;set&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">extrinsics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;call&#39;</span><span class="p">][</span><span class="s1">&#39;call_args&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span></div>
+
+
+<div class="viewcode-block" id="SubstrateNodeExtension.search_block_number">
+<a class="viewcode-back" href="../../python-sdk/Reference/sdk_interface.html#sdk_interface.extensions.SubstrateNodeExtension.search_block_number">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">search_block_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_datetime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">block_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search corresponding block number for provided `block_datetime`. the prediction tolerance is provided with</span>
+<span class="sd">        `block_time`</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        block_datetime: datetime</span>
+<span class="sd">        block_time: int</span>
+<span class="sd">        kwargs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">block_time</span><span class="p">)</span>
+
+        <span class="n">target_block_timestamp</span> <span class="o">=</span> <span class="n">block_datetime</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+
+        <span class="c1"># Retrieve Timestamp extrinsic for chain tip</span>
+        <span class="n">predicted_block_number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substrate</span><span class="o">.</span><span class="n">get_block_number</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">current_timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_block_timestamp</span><span class="p">(</span><span class="n">predicted_block_number</span><span class="p">)</span>
+        <span class="n">current_delta</span> <span class="o">=</span> <span class="n">current_timestamp</span> <span class="o">-</span> <span class="n">target_block_timestamp</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Delta </span><span class="si">{</span><span class="n">current_delta</span><span class="si">}</span><span class="s2"> sec with chain tip #</span><span class="si">{</span><span class="n">predicted_block_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">current_delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Requested block_datetime is higher than current chain tip&quot;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">accuracy</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">current_delta</span><span class="p">)):</span>
+
+            <span class="n">predicted_block_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">predicted_block_number</span> <span class="o">-</span> <span class="n">current_delta</span> <span class="o">/</span> <span class="n">block_time</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">predicted_block_number</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Requested datetime points before genesis of chain (#</span><span class="si">{</span><span class="n">predicted_block_number</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+            <span class="n">current_timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_block_timestamp</span><span class="p">(</span><span class="n">predicted_block_number</span><span class="p">)</span>
+
+            <span class="c1"># Predict target block number</span>
+            <span class="n">current_delta</span> <span class="o">=</span> <span class="n">current_timestamp</span> <span class="o">-</span> <span class="n">target_block_timestamp</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">debug_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current delta </span><span class="si">{</span><span class="n">current_delta</span><span class="si">}</span><span class="s2"> sec; predicted #</span><span class="si">{</span><span class="n">predicted_block_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accepted prediction #</span><span class="si">{</span><span class="n">predicted_block_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">predicted_block_number</span></div>
+</div>
+
+
+
+<span class="c1"># Backwards compatibility</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SubstrateNodeSearchExtension</span><span class="p">(</span><span class="n">SubstrateNodeExtension</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Portaldot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
