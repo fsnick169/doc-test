@@ -13,4 +13,5 @@ Portaldot Developer documentation
    Introduction
    chain-info
    python-sdk/index
-   rpc-call/constants/index
+   extension
+   module-interface/index

@@ -20,11 +20,13 @@ release = 'v1'
 extensions = [
      'sphinx.ext.autodoc',
      'sphinx.ext.viewcode',
+     'recommonmark',
+     'sphinx_markdown_tables',
  ]
 
 templates_path = ['_templates']
 exclude_patterns = []
-
+autosectionlabel_prefix_document = True
 
 
 # -- Options for HTML output -------------------------------------------------
