@@ -40,4 +40,3 @@ Select the ``Local Node`` in the network options.
 .. image:: network-switch.png
    :align: center
 
-
