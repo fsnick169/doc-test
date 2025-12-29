@@ -19,7 +19,7 @@ and then execute the following commands.
 
 .. code:: bash
 
-    tar -cxvf portaldot-testnet-ubuntu.tar.gz
+    tar -xzvf portaldot-testnet-ubuntu.tar.gz
     cd portaldot-testnet-ubuntu
     chmod 755 portaldot_dev
 
